@@ -16,7 +16,7 @@ import { handlePostRequest } from '../../services/PostTemplate';
 import { CustomerSpinner } from '../../components/CustomerSpinner';
 import { handleGetRequest } from '../../services/GetTemplate';
 
-const SendSurvey = ({ surveyObj }) => {
+const SendSurvey = ({ surveyObj, onHide, getSurveyList, getSubmittedSurveybyAllIndividuals }) => {
 
     console.log("surveyObj", surveyObj)
 
@@ -50,7 +50,7 @@ const SendSurvey = ({ surveyObj }) => {
                 const { _id, __v, ...rest } = item;
                 return rest;
             });
-            
+
             const obj = {
                 data: filteredSurveyObj[0],
                 email: formik.values.email,
@@ -58,10 +58,13 @@ const SendSurvey = ({ surveyObj }) => {
                 description: formik.values.description,
             }
             console.log("obj", obj)
-            
-            
+
             const response = await dispatch(handlePostRequest(obj, `/api/user/sendOtp`, true, true));
+            console.log("suereby send response", response)
             if (response) {
+                onHide()
+                getSurveyList()
+                getSubmittedSurveybyAllIndividuals()
             }
             setSaveBtnLoading(false)
         },
@@ -116,10 +119,10 @@ const SendSurvey = ({ surveyObj }) => {
                 <form onSubmit={formik.handleSubmit}>
                     <div className="p-fluid formgrid grid pl-5 pr-5 flex-row">
 
-                    <div className='flex flex-column col-12'>
+                        <div className='flex flex-column col-12'>
                             <label className='ml-3' style={{ fontWeight: "bold", color: "black" }}> Add Company</label>
                             <div className="field col-12 md:col-12 pl-3 pr-3 mt-2">
-                                <Dropdown options={allCompanies} optionLabel='companyName' filter filterBy='companyName' optionValue='_id' placeholder='Select Your Company' className="p-inputtext-sm" id="company" name="company" value={formik.values.company} onChange={formik.handleChange}  />
+                                <Dropdown options={allCompanies} optionLabel='companyName' filter filterBy='companyName' optionValue='_id' placeholder='Select Your Company' className="p-inputtext-sm" id="company" name="company" value={formik.values.company} onChange={formik.handleChange} />
                                 {getFormErrorMessage("company")}
                             </div>
                         </div>

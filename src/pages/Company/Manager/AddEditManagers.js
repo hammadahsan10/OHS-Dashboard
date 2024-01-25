@@ -17,7 +17,7 @@ import { baseURL } from '../../../Config';
 import { handlePutRequest } from '../../../services/PutTemplate';
 import { CustomerSpinner } from '../../../components/CustomerSpinner';
 
-const AddEditManagers = ({ companyId, rowObject, onHide, editable, getManagersByCompany }) => {
+const AddEditManagers = ({ companyId, rowObject, onHide, editable, getManagersByCompany, getManagersByCompanyId }) => {
 
     console.log("rowObject", rowObject)
     const [saveBtnLoading, setSaveBtnLoading] = useState(false)
@@ -34,7 +34,7 @@ const AddEditManagers = ({ companyId, rowObject, onHide, editable, getManagersBy
         email: Yup.string().email("Invalid email format.").required("This field is required."),
         department: Yup.string().required("This field is required."),
         jobTitle: Yup.string().required("This field is required."),
-        password: editable  ? null : Yup.string().required("This field is required."),
+        password: editable ? null : Yup.string().required("This field is required."),
         confirmPassword: editable ? null : Yup.string()
             .required("This field is required.")
             .oneOf([Yup.ref('password'), null], 'Passwords must match'),
@@ -72,8 +72,8 @@ const AddEditManagers = ({ companyId, rowObject, onHide, editable, getManagersBy
                 console.log("response", response)
                 if (response?.status == 200) {
                     onHide()
-                    await getManagersByCompany()
                     getManagersByCompany()
+                    getManagersByCompanyId()
                 }
                 setSaveBtnLoading(false)
             }
@@ -95,8 +95,8 @@ const AddEditManagers = ({ companyId, rowObject, onHide, editable, getManagersBy
                 const response = await dispatch(handlePostRequest(obj, "/api/user/ManagerSignUp", true, true));
                 if (response) {
                     onHide()
-                    await getManagersByCompany()
                     getManagersByCompany()
+                    getManagersByCompanyId()
                 }
                 setSaveBtnLoading(false)
             }
@@ -222,8 +222,8 @@ const AddEditManagers = ({ companyId, rowObject, onHide, editable, getManagersBy
                                 <InputText type='password' toggleMask placeholder='Enter your Confirm Password' id='confirmPassword' name="confirmPassword" value={formik.values.confirmPassword} onChange={formik.handleChange} className="p-inputtext-sm" autoComplete="off" />
                                 {getFormErrorMessage("confirmPassword")}
                             </div>
-                            
-                            }
+
+                        }
 
                         <div className='col-12 text-center mt-4 pb-2'>
                             <Button className="Save-Button w-3 ml-2" label={editable ? "Edit Manager" : "Add Manager"} type="submit" />

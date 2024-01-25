@@ -8,7 +8,7 @@ import Form4 from './EndForms/Form4';
 import Form5 from './EndForms/Form5';
 import Form6 from './EndForms/Form6';
 
-const MidYearForms = () => {
+const EndYearForms = () => {
 
     const location = useLocation();
     const history = useHistory()
@@ -24,8 +24,6 @@ const MidYearForms = () => {
         form4Data: '',
         form5Data: '',
         form6Data: '',
-        form7Data: '',
-        form8Data: '',
     });
 
     const headerList =
@@ -96,9 +94,11 @@ const MidYearForms = () => {
 
     return (
         <>
-
             <Dialog header={Header} style={{ width: '45vw', marginLeft: "290px", boxShadow: '0 15px 20px -5px gray, 0 12px 8px -8px #009bcb' }} visible={visible} onHide={onHide}>
                 {renderForm()}
+                <div className="footer">
+                    Page {currentStep} of 6
+                </div>
             </Dialog>
             <div className='text-center'>
                 <h2 style={{ color: "black", fontWeight: "700" }}> End of the Year Survey </h2>
@@ -108,4 +108,4 @@ const MidYearForms = () => {
     );
 };
 
-export default MidYearForms;
+export default EndYearForms;

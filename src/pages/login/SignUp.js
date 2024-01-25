@@ -192,7 +192,7 @@ const SignUp = () => {
                                 <span className="flex pl-7"> {getFormErrorMessage("confirmPassword")} </span>
                             </div>
 
-                            <div className="col-12 md:col-12 pl-2 pr-2">
+                            {/* <div className="col-12 md:col-12 pl-2 pr-2">
                                 <InputText
                                     placeholder="Enter Job Title"
                                     id="jobTitle"
@@ -217,7 +217,7 @@ const SignUp = () => {
                                 />
                                 <span className="flex pl-7">
                                     {getFormErrorMessage("department")} </span>
-                            </div>
+                            </div> */}
 
                             <div className='col-12 text-center'>
                                 <Button className="Save-Button w-6 mt-5" label="Sign up" loading={saveBtnLoading} type="submit" />

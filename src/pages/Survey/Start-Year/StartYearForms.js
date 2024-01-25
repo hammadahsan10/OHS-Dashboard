@@ -47,9 +47,8 @@ const StartYearForms = () => {
         currentHeader = headerList.find(item => item.id === currentStep + 1);
     };
 
-
     const renderForm = () => {
-        
+
         if (!visible) {
             return null;
         }
@@ -71,8 +70,7 @@ const StartYearForms = () => {
         }
     };
 
-    const onHide = () =>
-    {
+    const onHide = () => {
         setVisible(false)
         history.push('./surverys')
     }
@@ -87,16 +85,19 @@ const StartYearForms = () => {
             </>
         )
     }
-    
+
     return (
         <>
 
-            <Dialog header={Header} style={{ width: '45vw', marginLeft:"290px", boxShadow: '0 15px 20px -5px gray, 0 12px 8px -8px #009bcb' }} visible={visible} onHide={onHide}>
+            <Dialog header={Header} style={{ width: '45vw', marginLeft: "290px", boxShadow: '0 15px 20px -5px gray, 0 12px 8px -8px #009bcb' }} visible={visible} onHide={onHide}>
                 {renderForm()}
+                <div className="footer">
+                    Page {currentStep} of 5
+                </div>
             </Dialog>
             <div className='text-center'>
-                <h2 style={{ color: "black", fontWeight:"700" }}> Start of the Year Survey </h2>
-                <h5 style={{ color: "gray", marginTop:"-10px" }}> Please answer the following questions to help us access your performance </h5>
+                <h2 style={{ color: "black", fontWeight: "700" }}> Start of the Year Survey </h2>
+                <h5 style={{ color: "gray", marginTop: "-10px" }}> Please answer the following questions to help us access your performance </h5>
             </div>
         </>
     );

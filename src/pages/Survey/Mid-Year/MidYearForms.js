@@ -107,6 +107,9 @@ const MidYearForms = () => {
 
             <Dialog header={Header} style={{ width: '45vw', marginLeft: "290px", boxShadow: '0 15px 20px -5px gray, 0 12px 8px -8px #009bcb' }} visible={visible} onHide={onHide}>
                 {renderForm()}
+                <div className="footer">
+                    Page {currentStep} of 8
+                </div>
             </Dialog>
             <div className='text-center'>
                 <h2 style={{ color: "black", fontWeight: "700" }}> Mid of the Year Survey </h2>

@@ -5,8 +5,6 @@ import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik';
 import * as Yup from "yup";
 import { Button } from 'primereact/button';
-import { useDispatch } from 'react-redux';
-import { Dialog } from 'primereact/dialog';
 import { Rating } from "primereact/rating";
 import { Badge } from 'primereact/badge';
 
@@ -15,10 +13,10 @@ const Form2 = ({ myData, formData, handleChange }) => {
     const role_Name = localStorage.getItem('role_Name')
 
     const validationSchema = Yup.object().shape({
-        value9: Yup.mixed().required("This field is required."),
-        // value10: Yup.mixed().required("This field is required."),
-        value11: Yup.mixed().required("This field is required."),
-        // value12: Yup.mixed().required("This field is required."),
+        value9: role_Name == 'Individual' ? Yup.mixed().required("This field is required.") : null,
+        value10: role_Name == 'Admin' ? Yup.mixed().required("This field is required.") : null,
+        value11: role_Name == 'Individual' ? Yup.mixed().required("This field is required.") : null,
+        value12: role_Name == 'Admin' ? Yup.mixed().required("This field is required.") : null,
     });
 
     const formik = useFormik({
@@ -58,7 +56,7 @@ const Form2 = ({ myData, formData, handleChange }) => {
     };
 
     useEffect(() => {
-        if (role_Name == "Manager" || role_Name == "Admin") {
+        if (role_Name == "Manager" || role_Name == "Admin" || role_Name == "Individual") {
 
             const propertyNames = Object.keys(myData)
                 .filter(key => key.startsWith("value"));
@@ -135,7 +133,7 @@ const Form2 = ({ myData, formData, handleChange }) => {
                         </div>
                     </div>
 
-                    <div className='col-12 text-center mt-6 pb-2'>
+                    <div className='col-12 text-center mt-4 pb-2'>
                         <Button
                             className="Save-Button w-3 ml-2"
                             label="Next"
