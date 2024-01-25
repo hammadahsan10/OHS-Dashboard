@@ -58,8 +58,8 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "env-cmd -f .env.development react-scripts start",
-    "build": "env-cmd -f .env.development react-scripts build",
+    "start": "node api.js && env-cmd -f .env.development react-scripts start",
+    "build": "node api.js && env-cmd -f .env.development react-scripts build",
     "start:qa": "env-cmd -f .env.qa react-scripts start",
     "build:qa": "env-cmd -f .env.qa react-scripts start",
     "start:dev": "env-cmd -f .env.development react-scripts start",

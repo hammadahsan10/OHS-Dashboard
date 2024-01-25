@@ -56,7 +56,7 @@ const Form3 = ({myData, formData, handleChange }) => {
     };
 
     useEffect(() => {
-        if (role_Name == "Manager" || role_Name == "Admin") {
+        if (role_Name == "Manager" || role_Name == "Admin" || role_Name == "Individual") {
 
             const propertyNames = Object.keys(myData)
                 .filter(key => key.startsWith("value"));
@@ -77,13 +77,13 @@ const Form3 = ({myData, formData, handleChange }) => {
                 <div className="p-fluid formgrid grid pl-5 pr-5">
 
                     <div className="field col-12 md:col-12 pl-6 pr-6">
-                        <label>{myData?.key3}</label>
+                        <label>{myData?.key13}</label>
                         <InputText disabled={role_Name == 'Manager' || role_Name == 'Admin' ? true : false}  placeholder='Enter' className="p-inputtext-sm" id="value13" name="value13" value={formik.values.value13} onChange={formik.handleChange} type="text" />
                         {getFormErrorMessage("value13")}
                     </div>
                     
                     <div className="field col-12 md:col-12 pl-6 pr-6">
-                        <label>{myData?.key4}</label>
+                        <label>{myData?.key14}</label>
                         <InputText disabled={role_Name == 'Manager' || role_Name == 'Admin' ? true : false} placeholder='Enter' className="p-inputtext-sm" id="value14" name="value14" value={formik.values.value14} onChange={formik.handleChange} type="text" />
                         {getFormErrorMessage("value14")}
                     </div>
@@ -100,7 +100,7 @@ const Form3 = ({myData, formData, handleChange }) => {
                         {getFormErrorMessage("value16")}
                     </div>
 
-                    <div className='col-12 text-center mt-4 pb-2'>
+                    <div className='col-12 text-center mt-2 pb-2'>
                         <Button
                             className="Save-Button w-3 ml-2"
                             label="Next"

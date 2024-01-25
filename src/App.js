@@ -37,6 +37,7 @@ import MidYearFields from "./pages/Survey/MidYearFields";
 import EndYearFields from "./pages/Survey/EndYearFields";
 import StartYearForms from "./pages/Survey/Start-Year/StartYearForms";
 import MidYearForms from "./pages/Survey/Mid-Year/MidYearForms";
+import EndYearForms from "./pages/Survey/End-Year/EndYearForms";
 
 const App = () => {
 
@@ -264,12 +265,18 @@ const App = () => {
                                     <Route path="/notifications" component={Notifications} />
                                     <Route path="/myprofile" component={MyProfile} />
                                     <Route path="/home" component={Home} />
+
                                     <Route path="/surverys" component={Survey} />
+
+                                    {/* Survey Fields */}
                                     <Route path="/startyearfields" component={StartYearFields} />
                                     <Route path="/midyearfields" component={MidYearFields} />
+                                    <Route path="/endyearfields" component={EndYearFields} />
+
+                                    {/* Survery Forms */}
                                     <Route path="/startyearforms" component={StartYearForms} />
                                     <Route path="/midyearforms" component={MidYearForms} />
-                                    <Route path="/endyearfields" component={EndYearFields} />
+                                    <Route path="/endyearforms" component={EndYearForms} />
                                 </Switch>
 
                             </div>

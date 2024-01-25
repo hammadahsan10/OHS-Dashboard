@@ -74,7 +74,7 @@ const Form1 = ({ myData, formData, handleChange }) => {
     };
 
     useEffect(() => {
-        if (role_Name == "Manager" || role_Name == "Admin") {
+        if (role_Name == "Manager" || role_Name == "Admin" || role_Name == "Individual") {
 
             const propertyNames = Object.keys(myData)
                 .filter(key => key.startsWith("value"));
@@ -142,7 +142,7 @@ const Form1 = ({ myData, formData, handleChange }) => {
                         {getFormErrorMessage("value8")}
                     </div>
 
-                    <div className='col-12 text-center mt-4 pb-2'>
+                    <div className='col-12 text-center mt-2 pb-2'>
                         <Button
                             className="Save-Button w-3 ml-2"
                             label="Next"

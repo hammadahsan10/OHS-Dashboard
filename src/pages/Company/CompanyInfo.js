@@ -83,6 +83,22 @@ const CompanyInfo = () => {
     };
 
 
+    const getManagersByCompanyId = async () => {
+
+        setIsActive(true);
+        const response = await dispatch(handleGetRequest(`/api/user/GetManagerByCompany/${data?._id}`, true));
+        if (response) {
+        }
+        setIsActive(false);
+
+    };
+
+    useEffect(() => {
+        if (data) {
+            getManagersByCompanyId()
+        }
+    }, [data])
+
     return (
 
         <>
@@ -90,6 +106,7 @@ const CompanyInfo = () => {
                 <AddEditManagers
                     companyId={data?._id}
                     onHide={onHideManager}
+                    getManagersByCompanyId={getManagersByCompanyId}
                 />
             </Dialog>
 

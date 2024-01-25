@@ -7,11 +7,13 @@ import { handleGetRequest } from "../../services/GetTemplate";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import SendSurvey from "./SendSurvey";
+import { Badge } from "primereact/badge";
 
 const Survey = () => {
 
     const history = useHistory()
     const dispatch = useDispatch()
+    const currentYear = new Date().getFullYear();
     const role_Name = localStorage.getItem('role_Name')
     const userId = localStorage.getItem('userId')
     const companyId = localStorage.getItem('companyId')
@@ -186,6 +188,7 @@ const Survey = () => {
 
         setIsActive(true);
         const response = await dispatch(handleGetRequest(`/api/userSurvey/getByUserId/${userId}`, true));
+        console.log("res", response)
         if (response) {
             setMyData(response);
         }
@@ -228,6 +231,9 @@ const Survey = () => {
             <Dialog header={Header} visible={displayDialog} style={{ width: '45vw' }} onHide={onHide}>
                 <SendSurvey
                     surveyObj={surveyObj}
+                    onHide={onHide}
+                    getSurveyList={getSurveyList}
+                    getSubmittedSurveybyAllIndividuals={getSubmittedSurveybyAllIndividuals}
                 />
             </Dialog>
 
@@ -238,7 +244,7 @@ const Survey = () => {
             {role_Name == "Admin" ?
                 (
                     <>
-                        <h3 style={{ color: "black", fontWeight: "bold" }} className="ml-2 mt-6">2024</h3>
+                        <h3 style={{ color: "black", fontWeight: "bold" }} className="ml-2 mt-6">{currentYear}</h3>
                         <LoadingOverlay
                             active={isActive}
                             spinner={<Triangle
@@ -296,7 +302,7 @@ const Survey = () => {
                                 )
                             })}
 
-                            <h4 style={{ color: "black", fontWeight: "700" }} className="ml-2 mt-6">All Submitted Surverys List</h4>
+                            <h4 style={{ color: "black", fontWeight: "700" }} className="ml-2 mt-6">Submitted Surverys</h4>
                             {allIndividualsSubmiitedSurvey?.map(item => {
                                 return (
                                     <div key={item.id}>
@@ -307,7 +313,11 @@ const Survey = () => {
                                                 </div>
 
                                                 <div className="flex flex-row ml-6" style={{ alignItems: "center" }}>
-                                                    {/* <h6 style={{ color: 'black', fontSize: "15px" }} className="ml-6 mt-2">(Submitted by {item?.Name})</h6> */}
+                                                    <h6 style={{ color: 'black', fontSize: "15px", color: "#009bcb" }} className="ml-6 mt-2">(Submitted by {item?.userId?.username})</h6>
+                                                </div>
+
+                                                <div className="flex flex-row ml-5" style={{ alignItems: "center" }}>
+                                                    <h5 style={{ color: 'black' }} className="ml-6"><Badge value={item?.status == 'pending' ? 'Pending' : 'Completed'} className={item?.status == 'pending' ? 'badge-pending mt-2' : 'badge-success mt-2'} ></Badge> </h5>
                                                 </div>
                                             </div>
 
@@ -332,7 +342,7 @@ const Survey = () => {
                     <>
 
                         <h3 style={{ color: "black", fontWeight: "bold" }} className="ml-2 mt-6">Survey Submitted Details</h3>
-                        <h3 style={{ color: "black", fontWeight: "bold" }} className="ml-2 mt-2">2024</h3>
+                        <h3 style={{ color: "black", fontWeight: "bold" }} className="ml-2 mt-2">{currentYear}</h3>
                         <LoadingOverlay
                             active={isActive}
                             spinner={<Triangle
@@ -387,7 +397,7 @@ const Survey = () => {
                     : role_Name == "Individual" ? (
                         <>
                             <h3 style={{ color: "black", fontWeight: "bold" }} className="ml-2 mt-6">Survey Details</h3>
-                            <h3 style={{ color: "black", fontWeight: "bold" }} className="ml-2 mt-2">2024</h3>
+                            <h3 style={{ color: "black", fontWeight: "bold" }} className="ml-2 mt-2">{currentYear}</h3>
                             <LoadingOverlay
                                 active={isActive}
                                 spinner={<Triangle
@@ -408,13 +418,16 @@ const Survey = () => {
                                     })
                                 }}
                             >
-                                {[myData]?.map((item) => {
+                                {myData?.map((item) => {
                                     return (
                                         <div key={item._id}>
                                             <div className="scroll-container card flex justify-content-between">
                                                 <div className="flex flex-row">
                                                     <div className="flex flex-row" style={{ alignItems: "center" }}>
                                                         <h5 style={{ color: 'black' }} className="ml-6">{item?.Name}</h5>
+                                                    </div>
+                                                    <div className="flex flex-row ml-5" style={{ alignItems: "center" }}>
+                                                        <h5 style={{ color: 'black' }} className="ml-6"><Badge value={item?.status == 'pending' ? 'Pending' : 'Completed'} className={item?.status == 'pending' ? 'badge-pending mt-2' : 'badge-success mt-2'} ></Badge> </h5>
                                                     </div>
                                                 </div>
 
